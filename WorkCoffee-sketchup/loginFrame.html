@@ -7,7 +7,7 @@
     <div class="Top">
         <div class = "navbar">
             <div class = "background"></div>
-            <div class = "contents">
+            <button onclick = "location.href='frame.html'"  class = "contents">
                 <div class = "titleSec">
                     <div class = "logo"></div>
                     <div class = "Title">
@@ -15,31 +15,30 @@
                         <span class ="Coffee">Coffee</span>
                     </div>
                 </div> 
-            </div>
+            </button>
         </div>
-        <div class = "registerSection">
+
+        <div class = "loginSection">
             <div class = "Login">
                 <h1>Login</h1>
             </div>
-            <div class = "userOrEmail">
-                <h3>Username or Email</h3>
-                <div class = "inputUser">
-                    <h4>User</h4>
-                </div>
+            <div class = "user">
+                <input type="text" required>
+                <div class = "inputUser">Input Username or Email</div>
             </div>
             <div class = "passWord">
-                <h3>Password</h3>
-                <div class = "inputPass">
-                    <h4>Password</h4>
-                </div>
+                <input type = "text" required>
+                <div class = "inputPass">Input Password</div>
             </div>
             <div class = "accButtons">
-                <div class = "loginButton">
+                
+                <button class = "loginButton">
                     <h3>Login</h3>
-                </div>
-                <div class = "createAccount">
+                </button>
+                <p>Or, if you have want to make an account:</p>
+                <button onclick="location.href='registerFrame.html'" class = "createAccount">
                     <h3>Register</h3>
-                </div>
+                </button>
             </div>
         </div>
     </div>

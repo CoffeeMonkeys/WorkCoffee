@@ -7,7 +7,7 @@
     <div class="Top">
         <div class = "navbar">
             <div class = "background"></div>
-            <div class = "contents">
+            <button onclick = "location.href='frame.html'"  class = "contents">
                 <div class = "titleSec">
                     <div class = "logo"></div>
                     <div class = "Title">
@@ -15,46 +15,40 @@
                         <span class ="Coffee">Coffee</span>
                     </div>
                 </div> 
-            </div>
+            </button>
         </div>
+        <div class = "emptySpace"></div>
         <div class = "registerSection">
             <div class = "Register">
                 <h1>Register</h1>
             </div>
             <div class = "user">
-                <h3>Username:</h3>
-                <div class = "inputUser">
-                    <h4>User</h4>
-                </div>
+                <input type="text" required>
+                <div class = "inputUser">Input Username</div>
             </div>
             <div class = "email">
-                <h3>Email:</h3>
-                <div class = "inputEmail">
-                    <h3>Email</h3>
-                </div>
+                <input type = "email" required>
+                <div class = "inputEmail">Input Email</div>
             </div>
             <div class = "passWord">
-                <h3>Password:</h3>
-                <div class = "inputPass">
-                    <h4>Password</h4>
-                </div>
+                <input type = "text" required>
+                <div class = "inputPass">Input Password</div>
             </div>
             <div class = "rePassword">
-                <h3>Confirm Password:</h3>
-                <div class="inputRePass">
-                    <h4>Confirm Password</h4>
-                </div>
+                <input type = "text" required>
+                <div class="inputRePass">Confirm Password</div>
             </div>
             <div class = "accButtons">
-                <div class = "createAccount">
+                <button class = "createAccount">
                     <h3>Register</h3>
-                </div>
+                </button>
                 <p>Or, if you have an account:</p>
-                <div class = "loginButton">
+                <button onclick="location.href='loginFrame.html'" class = "loginButton">
                     <h3>Login</h3>
-                </div>
+                </button>
                 
             </div>
         </div>
+        <div class = "emptySpace"></div>
     </div>
 </body>
