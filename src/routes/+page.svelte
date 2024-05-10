@@ -1,4 +1,50 @@
-<!DOCTYPE html>
+<script lang="ts">
+    import {onMount} from 'svelte';
+    import axios from 'axios';
+    //Grab back end data
+    //Pull it up here
+    let userLocation = null;
+
+    let featuredName = null;
+    let featuredLocation = null;
+    let featuredRatings = null;
+    let featuredImage = null;
+
+    //Getting location
+    function success(position: GeolocationPosition){
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        async function getCoffeeShop() {
+            try{
+                /*const response = backend API repo
+                coffeeShopData = reponse.data
+                
+                ranNumber = random num gen
+                featuredShop = coffeeShopData[ranNumber]
+
+                featuredName = featuredShop.name;
+                featuredLocation = featuredShop.location;
+                featuredRatings = featuredShop.ratings;
+                featuredImage = featuredShop.image;
+                */
+            } catch (error){
+                console.error('Error fetching coffee shop data', error);
+            }
+        }
+    }
+    function error(error: GeolocationPositionError){
+        console.error('Error getting location:', error.message);
+    }
+    const options: PositionOptions = {
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0
+    };
+    onMount(() => {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+    })
+</script>
 <head>
     <title>
         Work Coffee
@@ -30,9 +76,9 @@
         <div class = "featured">
             <div class = "info">
                 <h1>Featured</h1>
-                <h4>Name</h4>
-                <h4>Location</h4>
-                <h4>Ratings Placeholder</h4>
+                <h4>{featuredName}</h4>
+                <h4>{featuredLocation}</h4>
+                <h4>{featuredRatings}</h4>
             </div>
             <div class = "image"><h1>Image Placeholder</h1></div>
         </div>
@@ -236,6 +282,7 @@ font-family: 'Inter';
     width: 50%;
     background-color: gray;
     text-align: center;
+    background-image: url({featuredImage});
 }
 
 /*Middle Section*/
