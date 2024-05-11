@@ -94,9 +94,6 @@
         navigator.geolocation.getCurrentPosition(success, error, options);
     })
 
-    function fetchCoffeeStores(){
-        console.log("Test");
-    }
     function test(){
         console.log("Test");
     }
@@ -124,8 +121,8 @@
                     </div>
                 </div> 
                 <div class = "searchBar">
-                    <input bind:value={cityName} name="SearchBar" placeholder="Enter your Zip Code...">
-                    <button on:click={() => test()} id="SearchButton">Enter Your City</button>
+                    <input bind:value={cityName} name="SearchBar" placeholder="Enter your location..." class="searchInput">
+                    <button on:click={() => test()} id="SearchButton" class="searchButton"><h1>> ></h1></button>
                 </div>
                 <div class = "user">
                     <button on:click={() => location.href='../login'} class = "login">Login</button>
@@ -277,7 +274,7 @@ font-family: 'Inter';
     align-items: center;
     width: 100%;
     height: 70%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     z-index: 3;
     border-radius: 5px;
     text-align:left;
@@ -287,6 +284,27 @@ font-family: 'Inter';
 .Top .navbar .contents .searchBar h1{
     font-weight: normal;
     margin-left: 10px;
+}
+
+.Top .navbar .contents .searchBar .searchInput{
+	width: 80%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.Top .navbar .contents .searchBar .searchButton{
+	width: 20%;
+	height: 100%;
+	background-color: #8B6504;
+	border-width: 1px;
+	border-color: #ffffff;
+	border-style: solid;
+	transition: 0.2s ease;
+	color:#ffffff
+}
+.Top .navbar .contents .searchBar .searchButton:hover{
+	transform: skew(-2deg, -2deg) scale(110%);
+	cursor: pointer;
 }
 
 /*Sign in and Register*/
@@ -364,7 +382,8 @@ font-family: 'Inter';
 }
 .Top .featured .image{
     height: 100%;
-    width: 50%;
+    width: 20%;
+	border-radius: 5px;
     background-color: gray;
     text-align: center;
 }
