@@ -53,7 +53,9 @@
         console.log('longitude:', longitude);
         async function getCoffeeShop() {
             try{
-                const response = await axios.get('http://localhost:3000/stores');
+                const response = await axios.get('http://localhost:3000/stores', {
+                    params: {latitude: latitude, longitude: longitude}
+                });
                 coffeeShopData = response.data;
 
                 let ranNumber = coffeeShopData[getRandom(coffeeShopData.length)];
@@ -95,13 +97,17 @@
         console.error('Error getting location:', error.message);
     }
     const options: PositionOptions = {
-        enableHighAccuracy: false,
+        enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0
     };
     onMount(() => {
         navigator.geolocation.getCurrentPosition(success, error, options);
     })
+
+    function fetchCoffeeStores(){
+        console.log("Test");
+    }
 </script>
 
 
@@ -124,11 +130,14 @@
                         <span class ="Coffee">Coffee</span>
                     </div>
                 </div> 
-                <div class = "searchBar"><h1>Search...</h1></div>
+                <div class = "searchBar">
+                    <input type="text" id="Search" name="SearchBar" placeholder="Enter your Zip Code...">
+                    <button on:click={fetchCoffeeStores} type="button" id="SearchButton">Enter Your City</button>
+                </div>
                 <div class = "user">
-                    <div class = "login">Login</div>
+                    <button on:click={() => location.href='/login'} class = "login">Login</button>
                     <div class = "decBlock"></div>
-                    <div class = "register">Register</div>
+                    <button on:click={() => location.href='/register'} class = "register">Register</button>
                 </div>
             </div>
         </div>
