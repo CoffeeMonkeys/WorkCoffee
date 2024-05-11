@@ -7,32 +7,26 @@
     let coffeeShopData = null;
 
     //featuredShop
-    let featuredShop = new Map<string, string>([
-        ["shopName", "null"],
-        ["shopLocation", "null"],
-        ["shopRatings", "null"],
-        ["shopImage", "null"]
-    ]);
+    let featuredName = "";
+    let featuredLocation = "";
+    let featuredRatings = "";
+    let featuredImage = "";
 
     //Top rated shops
-    let topRated1 = new Map<string, string>([
-        ["shopName", "null"],
-        ["shopLocation", "null"],
-        ["shopRatings", "null"],
-        ["shopImage", "null"]
-    ]);
-    let topRated2 = new Map<string, string>([
-        ["shopName", "null"],
-        ["shopLocation", "null"],
-        ["shopRatings", "null"],
-        ["shopImage", "null"]
-    ]);
-    let topRated3 = new Map<string, string>([
-        ["shopName", "null"],
-        ["shopLocation", "null"],
-        ["shopRatings", "null"],
-        ["shopImage", "null"]
-    ]);
+    let topRatedName1 = "";
+    let topRatedLocation1 = "";
+    let topRatedRatings1 = "";
+    let topRatedImage1 = "";
+
+    let topRatedName2 = "";
+    let topRatedLocation2 = "";
+    let topRatedRatings2 = "";
+    let topRatedImage2 = "";
+
+    let topRatedName3 = "";
+    let topRatedLocation3 = "";
+    let topRatedRatings3 = "";
+    let topRatedImage3 = "";
 
 
     //To help with css
@@ -41,9 +35,10 @@
     let topRatedBg2 = null;
     let topRatedBg3 = null;
 
-    function getRandom(max: number){
-        return Math.floor(Math.random() * max);
-    }
+    //Search bar var
+    let cityName = '';
+
+
     //Getting location
     function success(position: GeolocationPosition){
         const latitude = position.coords.latitude;
@@ -53,39 +48,33 @@
         console.log('longitude:', longitude);
         async function getCoffeeShop() {
             try{
-                const response = await axios.get('http://localhost:3000/stores', {
-                    params: {latitude: latitude, longitude: longitude}
+                const response = await axios.post('http://localhost:3000/stores', {
+                    longitude: longitude,
+                    latitude : latitude
                 });
-                coffeeShopData = response.data;
-
-                let ranNumber = coffeeShopData[getRandom(coffeeShopData.length)];
+                console.log(response.data);
+                coffeeShopData = response.data.businesses;
 
                 //Set the values of the lists, given the data
-                featuredShop.set("shopName", ranNumber.Name);
-                featuredShop.set("shopLocation", ranNumber.location);
-                featuredShop.set("shopRatings", (ranNumber.Reviews.toString()));
-                featuredShop.set("shopImage", ranNumber.image);
+                featuredName = coffeeShopData[0].name;
+                featuredLocation = coffeeShopData[0].location.display_address;
+                featuredRatings = coffeeShopData[0].rating.toString();
+                featuredImage = coffeeShopData[0].image_url; 
+                
+                topRatedName1 = coffeeShopData[1].name;
+                topRatedLocation1 = coffeeShopData[1].location.display_address;
+                topRatedRatings1 = coffeeShopData[1].rating.toString();
+                topRatedImage1 = coffeeShopData[1].image_url; 
 
-                topRated1.set("shopName", coffeeShopData[1].Name);
-                topRated1.set("shopLocation", coffeeShopData[1].location);
-                topRated1.set("shopRatings", (coffeeShopData[1].Reviews.toString()));
-                topRated1.set("shopImage", coffeeShopData[1].image);
+                topRatedName2 = coffeeShopData[2].name;
+                topRatedLocation2 = coffeeShopData[2].location.display_address;
+                topRatedRatings2 = coffeeShopData[2].rating.toString();
+                topRatedImage2 = coffeeShopData[2].image_url; 
 
-                topRated2.set("shopName", coffeeShopData[2].Name);
-                topRated2.set("shopLocation", coffeeShopData[2].location);
-                topRated2.set("shopRatings", (coffeeShopData[2].Reviews.toString()));
-                topRated2.set("shopImage", coffeeShopData[2].image);
-
-                topRated3.set("shopName", coffeeShopData[3].Name);
-                topRated3.set("shopLocation", coffeeShopData[3].location);
-                topRated3.set("shopRatings", (coffeeShopData[3].Reviews.toString()));
-                topRated3.set("shopImage", coffeeShopData[3].image);
-
-                featuredBg = featuredShop.get("shopImage");
-                topRatedBg1 = topRated1.get("shopImage");
-                topRatedBg2 = topRated2.get("shopImage");
-                topRatedBg3 = topRated3.get("shopImage");
-
+                topRatedName3 = coffeeShopData[3].name;
+                topRatedLocation3 = coffeeShopData[3].location.display_address;
+                topRatedRatings3 = coffeeShopData[3].rating.toString();
+                topRatedImage3 = coffeeShopData[3].image_url; 
 
             } catch (error){
                 console.error('Error fetching coffee shop data', error);
@@ -108,6 +97,9 @@
     function fetchCoffeeStores(){
         console.log("Test");
     }
+    function test(){
+        console.log("Test");
+    }
 </script>
 
 
@@ -116,6 +108,7 @@
         Work Coffee
     </title>
 </head>
+
 <body>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
@@ -131,64 +124,59 @@
                     </div>
                 </div> 
                 <div class = "searchBar">
-                    <input type="text" id="Search" name="SearchBar" placeholder="Enter your Zip Code...">
-                    <button on:click={fetchCoffeeStores} type="button" id="SearchButton">Enter Your City</button>
+                    <input bind:value={cityName} name="SearchBar" placeholder="Enter your Zip Code...">
+                    <button on:click={() => test()} id="SearchButton">Enter Your City</button>
                 </div>
                 <div class = "user">
-                    <button on:click={() => location.href='/login'} class = "login">Login</button>
+                    <button on:click={() => location.href='../login'} class = "login">Login</button>
                     <div class = "decBlock"></div>
-                    <button on:click={() => location.href='/register'} class = "register">Register</button>
+                    <button on:click={() => location.href='../register'} class = "register">Register</button>
                 </div>
             </div>
         </div>
         <div class = "featured">
-            <div class = "info">
+            <div class = "info" id = "change">
                 <h1>Featured</h1>
-                <h4>{featuredShop.get("shopName")}</h4>
-                <h4>{featuredShop.get("shopLocation")}</h4>
-                <h4>{featuredShop.get("shopRatings")}</h4>
+                <h4>{featuredName}</h4>
+                <h4>{featuredLocation}</h4>
+                <h4>{featuredRatings}</h4>
             </div>
-            <div class = "image"></div>
+            <img src={featuredImage} alt='Coffee' class = "image"/>
         </div>
     </div>
     <div class = "Middle">
         <div class = "topRated"><h1>Top Rated Nearby:</h1></div>
         <div class = "tRcontainer">
             <div class = "coffeeShop">
-                <h1>{topRated1.get("shopName")}</h1>
-                <h3>{topRated1.get("shopLocation")}</h3>
-                <h3>{topRated1.get("shopRatings")}</h3>
-                <div class = "imageContainer1"></div>
+                <h1>{topRatedName1}</h1>
+                <h3>{topRatedLocation1}</h3>
+                <h3>{topRatedRatings1}</h3>
+                <img src={topRatedImage1} alt='Coffee' class = "image"/>
             </div>
             <div class = "coffeeShop">
-                <h1>{topRated2.get("shopName")}</h1>
-                <h3>{topRated2.get("shopLocation")}</h3>
-                <h3>{topRated2.get("shopRatings")}</h3>
-                <div class = "imageContainer2"></div>
+                <h1>{topRatedName2}</h1>
+                <h3>{topRatedLocation2}</h3>
+                <h3>{topRatedRatings2}</h3>
+                <img src={topRatedImage2} alt='Coffee' class = "image"/>
             </div>
             <div class = "coffeeShop">
-                <h1>{topRated3.get("shopName")}</h1>
-                <h3>{topRated3.get("shopLocation")}</h3>
-                <h3>{topRated3.get("shopRatings")}</h3>
-                <div class = "imageContainer3"></div>
+                <h1>{topRatedName3}</h1>
+                <h3>{topRatedLocation3}</h3>
+                <h3>{topRatedRatings3}</h3>
+                <img src={topRatedImage3} alt='Coffee' class = "image"/>
                 
             </div>
         </div>
 
     </div>
     <div class = "Bottom">
-        <h1>Powered by Yelp API; Placeholder Footer</h1>
+        <h1>l</h1>
     </div>
 
 </body>
 
 <style>
-:root{
-    --featured-bg: url({featuredBg});
-    --topRated-bg1: url({topRatedBg1});
-    --topRated-bg2: url({topRatedBg2});
-    --topRated-bg3: url({topRatedBg3});
-}
+
 :global(html),body{
     height: 100%;
     margin: 0;
@@ -310,15 +298,18 @@ font-family: 'Inter';
     height: 50%;
     width: 25%;
     background-color: black;
+    border: 1px solid #000000;
     border-radius: 8px;
     color: #ffffff;
     z-index: 4;
+    transition: 0.2s ease;
 }
 .Top .navbar .contents .user .decBlock{
     height: 25%;
     width: 10%;
     background-image: linear-gradient(to right, black 25%, white);
     z-index: 4;
+
 }
 .Top .navbar .contents .user .register{
     height: 50%;
@@ -326,8 +317,18 @@ font-family: 'Inter';
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     color: #8B6504;
+    border: 1px solid #ffffff;
     z-index: 4;
+    transition: 0.2s ease;
 }
+
+.Top .navbar .contents .user .login:hover,
+.Top .navbar .contents .user .register:hover{
+    transform: scale(105%);
+    cursor: pointer;
+}
+
+
 .Top .navbar .contents .user .login,
 .Top .navbar .contents .user .decBlock,
 .Top .navbar .contents .user .register {
@@ -360,7 +361,6 @@ font-family: 'Inter';
     width: 50%;
     background-color: gray;
     text-align: center;
-    background-image: var(--featured-bg);
 }
 
 /*Middle Section*/
@@ -399,29 +399,40 @@ font-family: 'Inter';
     flex: 1;
     gap: 10px;
 }
+
+.Middle .tRcontainer .coffeeShop .image{
+    height: 85%;
+    width: 50%;
+    background-color: gray;
+    text-align: center;
+    transform: skew(-15deg, -10deg);
+    filter: drop-shadow(10px 10px);
+}
+
 .Middle .tRcontainer .coffeeShop{
     width: 50%;
     height: 75%;
     border: 25px solid rgba(255,255,255,.8);
     border-image: url("https://www.unicefusa.org/sites/default/files/answer-box.png") 20;
+    background-color: #000000a8;
     z-index: 100;
     
 }
 .Middle .tRcontainer .coffeeShop .imageContainer1{
     z-index: 1;
-    background-image: url(--topRated-bg1);
+    background-image: url({topRatedImage1});
     width: 100%;
     height: 100%;
 }
 .Middle .tRcontainer .coffeeShop .imageContainer2{
     z-index: 1;
-    background-image: url(--topRated-bg2);
+    background-image: url({topRatedImage2});
     width: 100%;
     height: 100%;
 }
 .Middle .tRcontainer .coffeeShop .imageContainer3{
     z-index: 1;
-    background-image: url(--topRated-bg3);
+    background-image: url({topRatedImage3});
     width: 100%;
     height: 100%;
 }
@@ -435,5 +446,6 @@ font-family: 'Inter';
 .Bottom{
     font-family: "Inter";
     text-align: center;
+    color: #ffffff;
 }
 </style>

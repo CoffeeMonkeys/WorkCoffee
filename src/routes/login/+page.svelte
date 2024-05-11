@@ -5,11 +5,10 @@
     <title>WorkCoffee Login</title>
 </head>
 <body>
-    <link rel="stylesheet" href="loginStyle.css">
     <div class="Top">
         <div class = "navbar">
             <div class = "background"></div>
-            <button onclick = "location.href='frame.html'"  class = "contents">
+            <button on:click={() => location.href='..'}  class = "contents">
                 <div class = "titleSec">
                     <div class = "logo"></div>
                     <div class = "Title">
@@ -45,6 +44,8 @@
         </div>
     </div>
 </body>
+
+
 <style>
 html, body{
     height: 100%;

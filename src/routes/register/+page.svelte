@@ -5,11 +5,10 @@
     <title>WorkCoffee Login</title>
 </head>
 <body>
-    <link rel="stylesheet" href="registerStyle.css">
     <div class="Top">
         <div class = "navbar">
             <div class = "background"></div>
-            <button onclick = "location.href='frame.html'"  class = "contents">
+            <button on:click={() => location.href='..'}  class = "contents">
                 <div class = "titleSec">
                     <div class = "logo"></div>
                     <div class = "Title">
@@ -45,7 +44,7 @@
                     <h3>Register</h3>
                 </button>
                 <p>Or, if you have an account:</p>
-                <button onclick="location.href='loginFrame.html'" class = "loginButton">
+                <button on:click={() => location.href='/login'} class = "loginButton">
                     <h3>Login</h3>
                 </button>
                 
