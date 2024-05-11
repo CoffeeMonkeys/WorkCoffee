@@ -137,8 +137,11 @@
         <div class = "featured">
             <div class = "info" id = "change">
                 <h1>Featured</h1>
+				<h3>Name:</h3>
                 <h4>{featuredName}</h4>
+				<h3>Location:</h3>
                 <h4>{featuredLocation}</h4>
+				<h3>Ratings:</h3>
                 <h4>{featuredRatings}</h4>
             </div>
             <img src={featuredImage} alt='Coffee' class = "image"/>
@@ -348,6 +351,9 @@ font-family: 'Inter';
     top:20%;
     transform: translateY(50%);
     gap: 10px;
+}
+.Top .featured h3{
+	color:#8B6504
 }
 .Top .featured .info{
     text-align: center;
