@@ -40,7 +40,7 @@
 
 
     //Getting location
-    function success(position: GeolocationPosition){
+    function success (position: GeolocationPosition) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
